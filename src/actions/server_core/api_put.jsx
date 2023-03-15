@@ -2,23 +2,25 @@ import axios from 'axios';
 import { api_links, headers } from "./endpoint";
 
 /**
- * @brief Get data from server.
+ * @brief Put data to server.
  *
  * @param endpoint_name Title to the data location in the API.
  * @param data data to send.
  *
  * @returns Data received from server.
  */
-export const ApiGet = async (endpoint_name) => {
-    const link = api_links.BACKEND + '/' + endpoint_name;
-    let value = null
+export const ApiPut = async (endpoint_name, data) => {
+    const link_api = api_links.BACKEND + '/' + endpoint_name;
+    let value = null;
+
     try {
-        await axios.get(link,headers).then(response => { 
+        await axios.put(link_api, data, headers).then(response => { 
             value = response 
             return response 
         });
     } catch (error) {
         console.log(error.response);
+        return null;
     }
-    return value;
+    return value
 };

@@ -2,22 +2,23 @@ import axios from 'axios';
 import { api_links, headers } from "./endpoint";
 
 /**
- * @brief Get data from server.
+ * @brief Post data to server.
  *
  * @param endpoint_name Title to the data location in the API.
  * @param data data to send.
  *
  * @returns Data received from server.
  */
-export const ApiGet = async (endpoint_name) => {
-    const link = api_links.BACKEND + '/' + endpoint_name;
+export const ApiPost = async (endpoint_name, data) => {
+    const link_api = api_links.BACKEND + '/' + endpoint_name;
     let value = null
     try {
-        await axios.get(link,headers).then(response => { 
+        await axios.post(link_api, data, headers).then(response => { 
             value = response 
             return response 
         });
     } catch (error) {
+        console.log("respota erro: \n")
         console.log(error.response);
     }
     return value;
