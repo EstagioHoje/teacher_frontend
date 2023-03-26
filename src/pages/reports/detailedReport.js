@@ -1,6 +1,7 @@
-import './detailedReport.css'
-import reports from './reports.json'
 import { useState } from 'react';
+
+import './detailedReport.css'
+import reports from '../../data/reports.json'
 
 export function DetailedReport({ reportId }) {
   const report = reports[reportId]

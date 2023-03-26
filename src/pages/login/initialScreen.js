@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { RegisterUser } from './registerUser';
 import { LoginScreen } from './loginScreen';
+import { RegisterUser } from './registerUser';
 
 export function InitialScreen({ logIn }) {
   const [isNewUser, setIsNewUser] = useState(false);

@@ -1,5 +1,5 @@
 import './sidebar.css'
-import '../../images/logo.svg'
+import logo from '../../images/logo.svg'
 import '../../images/jobOffers.svg'
 import '../../images/handWithPencil.svg'
 import '../../images/reportEvaluation.svg'
@@ -16,12 +16,12 @@ export function Sidebar({ logOut, changeServiceOnScreen, buttonsToShow }) {
     )
   });
   return (
-    <div className="sidebar">
-      <img className="logoImage" src={require('../images/logo.svg')} alt="Estágio Hoje" />
-      <div className="buttonsArea">
+    <div className='sidebar'>
+      <img className='logoImage' src={logo} alt='Estágio Hoje' />
+      <div className='buttonsArea'>
         {buttonsList}
       </div>
-      <div className="logOut">
+      <div className='logOut'>
         <button onClick={() => logOut(false)}>&lt; Sair</button>
       </div>
     </div>

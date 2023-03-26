@@ -1,8 +1,14 @@
 import './header.css'
-import services from './services.json'
 import JobFilter from '../jobs/jobFilter';
+import services from '../../data/services.json'
 
-export function Header({ serviceOnScreen, setDetailed, filterText, onFilterTextChange, onFilterDataChange }) {
+export function Header({
+  serviceOnScreen,
+  setDetailed,
+  filterText,
+  onFilterTextChange,
+  onFilterDataChange
+}) {
 
   if(serviceOnScreen === 'dataManagement') {
     return (
@@ -22,7 +28,10 @@ export function Header({ serviceOnScreen, setDetailed, filterText, onFilterTextC
         <h1>{services[serviceOnScreen].text}</h1>
       </div>
       <div className='search'>
-        <JobFilter serviceOnScreen={serviceOnScreen} onFilterDataChange={onFilterDataChange} />
+        <JobFilter
+          serviceOnScreen={serviceOnScreen}
+          onFilterDataChange={onFilterDataChange}
+        />
         <input
           id='searchBar'
           name='searchBar'

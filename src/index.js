@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './pages/mainPage/App';
+import App from './App';
 
 const main = ReactDOM.createRoot(document.getElementById('main'));
-main.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// main.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>
+// );

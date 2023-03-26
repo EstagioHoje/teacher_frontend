@@ -1,5 +1,5 @@
 import './dataManagement.css'
-import teacher from './teacherData.json'
+import teacher from '../../data/teacherData.json'
 
 export function DataManagement() {
   const onSubmit = () => {

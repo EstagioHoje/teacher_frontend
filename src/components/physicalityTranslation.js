@@ -1,6 +1,6 @@
-import home from '../../images/home.svg'
-import hybrid from '../../images/hybrid.svg'
-import inPerson from '../../images/inPerson.svg'
+import home from '../images/home.svg'
+import hybrid from '../images/hybrid.svg'
+import inPerson from '../images/inPerson.svg'
 
 export function physicalityTranslation(physicality){
   if(physicality === 'flexibe') {

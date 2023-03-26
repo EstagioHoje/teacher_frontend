@@ -1,8 +1,7 @@
 {
   "jobOffers": {
     "img": "jobOffers.svg",
-    "text": "Vagas Disponíveis",
-    "button": "Consulta de vagas"
+    "text": "Vagas Disponíveis"
   },
   "contractApproval": {
     "img": "handWithPencil.svg",

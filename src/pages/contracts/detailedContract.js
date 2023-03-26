@@ -1,5 +1,5 @@
 import './detailedContract.css'
-import contracts from './contracts.json'
+import contracts from '../../data/contracts.json'
 
 export function DetailedContract({ contractId }) {
   const contract = contracts[contractId]

@@ -1,5 +1,5 @@
 import { ReportIcon } from "./reportIcon";
-import reports from './reports.json'
+import reports from '../../data/reports.json'
 
 export function ReportEvaluation({ filterText, setReportDetailed }) {
   const listOfReportsToShow = [];

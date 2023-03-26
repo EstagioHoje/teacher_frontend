@@ -1,5 +1,5 @@
 import { ContractIcon } from "./contractIcon";
-import contracts from './contracts.json'
+import contracts from '../../data/contracts.json'
 
 export function ContractApproval({ filterText, setContractDetailed }) {
   const listOfContractsToShow = [];

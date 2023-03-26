@@ -1,18 +1,18 @@
 [
   {
-    "imgSrc": "../images/jobOffers.svg",
+    "imgSrc": "../../images/jobOffers.svg",
     "imgAlt": "Consulta de vagas",
     "service": "jobOffers"
   },{
-    "imgSrc": "../images/handWithPencil.svg",
+    "imgSrc": "../../images/handWithPencil.svg",
     "imgAlt": "Aprove contratos",
     "service": "contractApproval"
   },{
-    "imgSrc": "../images/reportEvaluation.svg",
+    "imgSrc": "../../images/reportEvaluation.svg",
     "imgAlt": "Avalie relatórios",
     "service": "reportEvaluation"
   },{
-    "imgSrc": "../images/dataManagement.svg",
+    "imgSrc": "../../images/dataManagement.svg",
     "imgAlt": "Altere seus dados",
     "service": "dataManagement"
   }

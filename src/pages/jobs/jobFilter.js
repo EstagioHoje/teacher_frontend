@@ -1,13 +1,16 @@
 import { useState } from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  DialogTitle
+} from '@mui/material';
+
 import menu from '../../images/menu.svg'
 
 import './jobFilter.css'
-import jobs from './jobs.json'
+import jobs from '../../data/jobs.json'
 
 export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
   const [possibleAddress, setPossibleAddress] = useState([])

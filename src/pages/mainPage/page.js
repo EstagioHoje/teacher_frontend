@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { Header } from './header';
 import { JobOffers } from '../jobs/jobOffers'
 import { DetailedJob } from '../jobs/detailedJob';
 import { ContractApproval } from '../contracts/contractApproval';
-import { Header } from './header';
-import { DataManagement } from '../dataChange/dataManagement';
 import { DetailedContract } from '../contracts/detailedContract';
 import { ReportEvaluation } from '../reports/reportEvaluation';
 import { DetailedReport } from '../reports/detailedReport';
+import { DataManagement } from '../dataChange/dataManagement';
 
 export function Page({ serviceOnScreen }) {
   const [detailed, setDetailed] = useState('')

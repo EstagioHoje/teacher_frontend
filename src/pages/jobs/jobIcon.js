@@ -1,8 +1,9 @@
 import './columnIcon.css'
-import { physicalityTranslation } from '../mainPage/physicalityTranslation'
+import { physicalityTranslation } from '../../components/physicalityTranslation'
+
 import clock from '../../images/clock.svg'
-import jobVacancies from '../../images/jobVacancies.svg'
 import locationPin from '../../images/locationPin.svg'
+import jobVacancies from '../../images/jobVacancies.svg'
 
 export function JobIcon({ jobId, jobRole, companyName, dailyHours, vacancies, address, physicality, showDetailsOf }) {
   return (

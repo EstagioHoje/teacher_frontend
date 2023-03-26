@@ -1,5 +1,5 @@
 import { JobIcon } from './jobIcon';
-import jobs from './jobs.json'
+import jobs from '../../data/jobs.json'
 
 export function JobOffers({ filterText, filterData, setJobDetailed }) {
   const listOfJobsToShow = [];
