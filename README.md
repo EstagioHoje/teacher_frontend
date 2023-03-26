@@ -14,7 +14,7 @@ chmod +x run.sh
 ./run.sh
 ```
 
-Acess:
+Access:
 ```
 http://localhost:1234
 ```

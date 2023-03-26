@@ -4,13 +4,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
+import menu from '../../images/menu.svg'
 
-import './filterButton.css'
-import jobs from '../jobs/jobs.json'
-import JobFilter from '../jobs/jobFilter';
+import './jobFilter.css'
+import jobs from './jobs.json'
 
-export default function FilterButton({ serviceOnScreen, onFilterDataChange }) {
-  // const [possibleAddress, setPossibleAddress] = useState([])
+export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
+  const [possibleAddress, setPossibleAddress] = useState([])
   const [minWage, setMinWage] = useState('')
   const [showFlexibe, setShowFlexibe] = useState(true)
   const [showHybrid, setShowHybrid] = useState(true)
@@ -18,66 +18,58 @@ export default function FilterButton({ serviceOnScreen, onFilterDataChange }) {
   const [minVacancies, setMinVacancies] = useState('')
   const [dailyHours, setDailyHours] = useState('')
   const [address, setAddress] = useState('anyAddress')
-  const [openJobFilter, setOpenJobFilter] = useState(false);
-  const [openContractFilter, setOpenContractFilter] = useState(false);
-  const [openReportFilter, setOpenReportFilter] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const openSomeFilter = () => {
-    if(serviceOnScreen === 'jobOffers') {
-      // var addressList = []
-      // var addressOptions = [<option value='anyAddress' selected={address === 'anyAddress'}>Indiferente</option>]
-      // jobs.forEach((job) => {
-      //   if(addressList.indexOf(job.address) === -1) {
-      //     addressList.push(
-      //       job.address
-      //     )
-      //     addressOptions.push(
-      //       <option value={job.address} selected={address === job.address}>{job.address}</option>
-      //     )
-      //   }
-      // })
-      // setPossibleAddress(addressOptions)
-      setOpenJobFilter(true)
-    } else if(serviceOnScreen === 'contractApproval') {
-      setOpenContractFilter(true)
-    } else if(serviceOnScreen === 'reportEvaluation') {
-      setOpenReportFilter(true)
-    }
+  const handleOpen = () => {
+    var addressList = []
+    var addressOptions = [<option value='anyAddress' selected={address === 'anyAddress'}>Indiferente</option>]
+    jobs.forEach((job) => {
+      if(addressList.indexOf(job.address) === -1) {
+        addressList.push(
+          job.address
+        )
+        addressOptions.push(
+          <option value={job.address} selected={address === job.address}>{job.address}</option>
+        )
+      }
+    })
+    setPossibleAddress(addressOptions)
+    setOpen(true)
   }
 
-  // const handleConfirm = () => {
-  //   setAddress(document.getElementById('addressSelect').value)
-  //   setOpenJobFilter(false)
-  //   onFilterDataChange({
-  //     "minWage": minWage,
-  //     "showFlexibe": showFlexibe,
-  //     "showHybrid": showHybrid,
-  //     "showInPerson": showInPerson,
-  //     "minVacancies": minVacancies,
-  //     "dailyHours": dailyHours,
-  //     "address": address
-  //   })
-  // };
+  const handleConfirm = () => {
+    setAddress(document.getElementById('addressSelect').value)
+    setOpen(false)
+    onFilterDataChange({
+      "minWage": minWage,
+      "showFlexibe": showFlexibe,
+      "showHybrid": showHybrid,
+      "showInPerson": showInPerson,
+      "minVacancies": minVacancies,
+      "dailyHours": dailyHours,
+      "address": address
+    })
+  };
 
-  // const handleAbort = () => {
-  //   setMinWage('')
-  //   setShowFlexibe(true)
-  //   setShowHybrid(true)
-  //   setShowInPerson(true)
-  //   setMinVacancies('')
-  //   setDailyHours('')
-  //   setAddress('anyAddress')
-  //   onFilterDataChange({
-  //     "minWage": minWage,
-  //     "showFlexibe": showFlexibe,
-  //     "showHybrid": showHybrid,
-  //     "showInPerson": showInPerson,
-  //     "minVacancies": minVacancies,
-  //     "dailyHours": dailyHours,
-  //     "address": address
-  //   })
-  //   setOpenJobFilter(false)
-  // }
+  const handleReset = () => {
+    setMinWage('')
+    setShowFlexibe(true)
+    setShowHybrid(true)
+    setShowInPerson(true)
+    setMinVacancies('')
+    setDailyHours('')
+    setAddress('anyAddress')
+    onFilterDataChange({
+      "minWage": minWage,
+      "showFlexibe": showFlexibe,
+      "showHybrid": showHybrid,
+      "showInPerson": showInPerson,
+      "minVacancies": minVacancies,
+      "dailyHours": dailyHours,
+      "address": address
+    })
+    setOpen(false)
+  }
 
   const onNumberChange = (whereToChange, value) => {
     if(value >= 0) {
@@ -85,18 +77,17 @@ export default function FilterButton({ serviceOnScreen, onFilterDataChange }) {
     }
   }
 
+  if(serviceOnScreen !== 'jobOffers') {
+    return
+  }
+
   return (
     <div>
-      <button className='searchButton' onClick={openSomeFilter}>
-        <img src='menu.svg' alt='menu' />
+      <button className='searchButton' onClick={handleOpen}>
+        <img src={menu} alt='menu' />
         <p>Filtros</p>
       </button>
-      <JobFilter
-        isOpen={openJobFilter}
-        setOpen={() => setOpenJobFilter}
-        onFilterDataChange={onFilterDataChange}
-      />
-      {/* <Dialog open={openJobFilter} onClose={handleConfirm}>
+      <Dialog open={open} onClose={handleConfirm}>
         <DialogTitle className='filterTitle'>Filtre as vagas disponíveis</DialogTitle>
         <DialogContent className='filterContent'>
           <ul className='filterList'>
@@ -173,12 +164,9 @@ export default function FilterButton({ serviceOnScreen, onFilterDataChange }) {
           </ul>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleAbort} >Resetar</Button>
+          <Button onClick={handleReset} >Resetar</Button>
           <Button onClick={handleConfirm}>Filtrar</Button>
         </DialogActions>
-      </Dialog> */}
-      <Dialog open={openContractFilter} onClose={handleConfirm}>
-        <DialogTitle className='filterTitle'>Filtre os contratos disponíveis</DialogTitle>
       </Dialog>
     </div>
   );

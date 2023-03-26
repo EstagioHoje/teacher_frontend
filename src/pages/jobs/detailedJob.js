@@ -1,11 +1,11 @@
 import './detailedJob.css'
 import jobs from './jobs.json'
 import { physicalityTranslation } from '../mainPage/physicalityTranslation'
-import clock from '../images/clock.svg'
-import locationPin from '../images/locationPin.svg'
-import jobVacancies from '../images/jobVacancies.svg'
-import coin from '../images/coin.svg'
-import star from '../images/star.svg'
+import clock from '../../images/clock.svg'
+import locationPin from '../../images/locationPin.svg'
+import jobVacancies from '../../images/jobVacancies.svg'
+import coin from '../../images/coin.svg'
+import star from '../../images/star.svg'
 
 export function DetailedJob({ jobId }) {
   const job = jobs[jobId]

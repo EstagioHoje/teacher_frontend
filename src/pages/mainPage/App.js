@@ -4,7 +4,7 @@ import { Sidebar } from './sidebar';
 import { Page } from './page';
 import { InitialScreen } from '../login/initialScreen';
 import teacherButtons from './teacherButtons.json'
-import logo from '../images/logo.svg'
+import logo from '../../images/logo.svg'
 
 export default App;
 

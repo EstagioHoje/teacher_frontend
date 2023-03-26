@@ -1,9 +1,9 @@
 import './sidebar.css'
-import '../images/logo.svg'
-import '../images/jobOffers.svg'
-import '../images/handWithPencil.svg'
-import '../images/reportEvaluation.svg'
-import '../images/dataManagement.svg'
+import '../../images/logo.svg'
+import '../../images/jobOffers.svg'
+import '../../images/handWithPencil.svg'
+import '../../images/reportEvaluation.svg'
+import '../../images/dataManagement.svg'
 
 export function Sidebar({ logOut, changeServiceOnScreen, buttonsToShow }) {
   const buttonsList = [];
