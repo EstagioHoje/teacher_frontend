@@ -1,0 +1,63 @@
+.searchButton {
+  margin-right: 5px;
+  display: flex;
+  border: none;
+  height: 30px;
+  background-color: var(--neutral-color);
+}
+
+.searchButton > p {
+  margin: auto;
+  padding-right: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font);
+}
+
+.searchButton > img {
+  margin: auto 3px;
+  height: 22px;
+}
+
+.filterTitle {
+  text-align: center;
+}
+
+.filterContent {
+  width: 350px;
+}
+
+.filterList {
+  list-style: none;
+}
+
+.filterList > li > p {
+  font-size: 18px;
+  font-family: var(--font);
+  text-align: center;
+  padding-top: 5px;
+}
+
+.filterList > li > input,
+.filterList > li > select {
+  width: 90%;
+  margin: 0 5% 10px;
+  padding: 3px;
+  font-size: 16px;
+  text-align: center;
+  font-family: var(--font);
+  border: none;
+  background-color: white;
+}
+
+.checkBoxes {
+  padding: 3px 0 2px 30%;
+}
+
+.checkBoxes:last-of-type{
+  margin-bottom: 10px;
+}
+
+.checkBoxes > input {
+  margin-right: 10px;
+}

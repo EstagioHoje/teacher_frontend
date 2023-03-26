@@ -1,0 +1,19 @@
+{
+  "jobOffers": {
+    "img": "jobOffers.svg",
+    "text": "Vagas Disponíveis",
+    "button": "Consulta de vagas"
+  },
+  "contractApproval": {
+    "img": "handWithPencil.svg",
+    "text": "Aprove contratos"
+  },
+  "reportEvaluation": {
+    "img": "reportEvaluation.svg",
+    "text": "Avalie relatórios"
+  },
+  "dataManagement": {
+    "img": "dataManagement.svg",
+    "text": "Altere seus dados"
+  }
+}

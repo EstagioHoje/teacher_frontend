@@ -1,0 +1,46 @@
+.report {
+  font-size: 18px;
+  font-family: var(--font);
+  text-align: justify;
+  padding: 10px 15px;
+  margin: 0 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: var(--neutral-color-2);
+  border: 2px solid var(--main-color);
+}
+
+.reportEvaluation > h2 {
+  margin: 3px 10px;
+  padding-left: 15px;
+  font-size: 20px;
+  font-family: var(--font);
+  /* border: 1px solid red; */
+}
+
+.reportGraduation {
+  text-align: center;
+}
+
+.reportGraduation > input {
+  width: 25%;
+  font-size: 20px;
+  text-align: center;
+  font-family: var(--font);
+  display: block;
+  padding: 5px;
+  margin: 5px auto;
+  border-radius: 5px;
+  border: 2px solid var(--neutral-color-2);
+}
+
+.reportGraduation > button {
+  width: 25%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-family: var(--font);
+  color: var(--secondary-color);
+  border: none;
+  background-color: var(--main-color);
+}

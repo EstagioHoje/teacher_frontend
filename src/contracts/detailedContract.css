@@ -1,0 +1,37 @@
+.contract {
+  padding: 5px;
+  padding-bottom: 25px;
+}
+
+.contract > h1 {
+  font-size: 22px;
+  font-family: var(--font);
+  text-align: center;
+}
+
+.dataArea {
+  margin: 5px auto;
+}
+
+.dataArea > h2 {
+  font-size: 20px;
+  font-family: var(--font);
+  text-align: center;
+}
+
+.dataArea > p {
+  font-size: 18px;
+  font-family: var(--font);
+  padding: 5px 10px;
+}
+
+.flexInfo {
+  display: flex;
+  font-size: 18px;
+  font-family: var(--font);
+  padding: 5px 10px;
+}
+
+.flexInfo > p {
+  margin-left: 0;
+}

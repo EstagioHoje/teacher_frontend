@@ -1,0 +1,109 @@
+.detailedHeader {
+  text-align: center;
+  font-size: 25px;
+  /* border: 1px solid red; */
+}
+
+.detailedHeader > h1 {
+  font-size: 30px;
+  font-family: var(--font);
+  padding: 5px;
+  /* border: 1px solid red; */
+}
+
+.detailedHeader > h2 {
+  color: var(--main-color);
+  font-size: 25px;
+  font-family: var(--font);
+  padding: 5px;
+  font-family: var(--font);
+}
+
+.centerPage {
+  display: flex;
+}
+
+.centerPage > section {
+  width: 29%;
+  /* width: 250px; */
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: var(--neutral-color-2);
+  border: 3px solid var(--main-color);
+}
+
+.centerPage > section > h1 {
+  font-size: 20px;
+  margin: 5px auto;
+  text-align: center;
+}
+
+.detail {
+  display: flex;
+  padding: 5px;
+  margin: 5px 3px;
+  /* border: 1px solid red; */
+}
+
+.detail > img {
+  margin: 0;
+  width: 25px;
+  /* border: 1px solid red; */
+}
+
+.detail > p {
+  margin: auto 5px;
+  font-weight: 600;
+  /* border: 1px solid blue; */
+}
+
+.detail > span {
+  margin-right: 0;
+  font-size: 16px;
+  font-weight: 600;
+  /* border: 1px solid green; */
+}
+
+.apply {
+  margin: 5%;
+  width: 90%;
+  padding: 10px;
+  font-size: 22px;
+  color: var(--secondary-color);
+  background-color: var(--main-color);
+}
+
+.detailedDescription {
+  width: 69%;
+  margin: 0;
+  padding: 0 5px;
+  /* border: 1px solid red; */
+}
+
+.detailedDescription > h2 {
+  margin-top: 0px;
+  text-align: center;
+  /* border: 1px solid green; */
+}
+
+.detailedDescription > h2:last-of-type {
+  margin-top: 10px;
+}
+
+.paragraph {
+  font-size: 18px;
+  padding: 5px;
+  text-align: justify;
+  /* border: 1px solid blue; */
+}
+
+.paragraph:last-of-type {
+  margin-bottom: 5px;
+}
+
+.topics {
+  margin: 5px 10px;
+  font-size: 17px;
+  /* border: 1px solid red; */
+}

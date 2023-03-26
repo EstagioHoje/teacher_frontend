@@ -1,0 +1,54 @@
+.sidebar {
+  background-color: var(--main-color);
+  height: 100%;
+  position: fixed;
+  width: 240px;
+}
+
+.logoImage {
+  margin-top: 20px;
+  display: block;
+  width: 200px;
+}
+
+.buttonsArea {
+  margin: 15px;
+}
+
+.buttonsArea > button {
+  width: 100%;
+  display: flex;
+  margin-bottom: 15px;
+  background-color: var(--neutral-color);
+}
+
+.buttonsArea > button:last-of-type {
+  margin-bottom: 0;
+}
+
+.buttonsArea > button > img {
+  width: 40px;
+  margin: 5px;
+  margin-right: 0;
+}
+
+.buttonsArea > button > p {
+  font-size: 20px;
+  font-family: var(--font);
+  text-align: left;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.logOut {
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+}
+
+.logOut > button {
+  color: var(--secondary-color);
+  background-color: var(--main-color);
+  display: block;
+  font-size: 20px;
+}

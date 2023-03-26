@@ -1,0 +1,45 @@
+header {
+  background-color: var(--neutral-color-2);
+  display: flex;
+  margin-bottom: 5px;
+  border-bottom: 5px solid var(--main-color);
+}
+
+.header {
+  width: 100%;
+  margin: 5px;
+  /* border: 1px solid red; */
+}
+
+.header > h1 {
+  font-size: 30px;
+  font-weight: 900;
+  font-family: var(--font);
+  color: var(--main-color);
+  text-align: center;
+  /* border: 1px solid red; */
+}
+
+.header > button {
+  margin-left: 5px;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: var(--font);
+  color: var(--main-color);
+  background-color: var(--neutral-color-2);
+  /* border: 1px solid red; */
+}
+
+.search {
+  width: 150%;
+  margin: 5px;
+  display: flex;
+  /* border: 1px solid red; */
+}
+.search > input {
+  padding-left: 5px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+}
