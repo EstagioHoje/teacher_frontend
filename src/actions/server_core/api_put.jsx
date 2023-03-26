@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { api_links, headers } from "./endpoint";
+import { api_links, headers_post } from "./endpoint";
 
 /**
  * @brief Put data to server.
@@ -14,7 +14,7 @@ export const ApiPut = async (endpoint_name, data) => {
     let value = null;
 
     try {
-        await axios.put(link_api, data, headers).then(response => { 
+        await axios.put(link_api, data, headers_post).then(response => { 
             value = response 
             return response 
         });
