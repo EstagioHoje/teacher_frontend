@@ -1,16 +1,20 @@
-import './columnIcon.css'
+import './jobIcon.css'
 import { physicalityTranslation } from '../../components/physicalityTranslation'
 
 import clock from '../../images/clock.svg'
 import locationPin from '../../images/locationPin.svg'
 import jobVacancies from '../../images/jobVacancies.svg'
 
-export function JobIcon({ jobId, jobRole, companyName, dailyHours, vacancies, address, physicality, showDetailsOf }) {
+export function JobIcon({ id, role, company, dailyHours, vacancies, address, physicality }) {
+  
+  function showDetailsOf(jobId) {
+    location.pathname += ('/' + jobId)
+  }
   return (
-    <button className='columnIcon half' onClick={() => showDetailsOf(['job', jobId])}>
-      <p className='aboveLine'>{jobRole}</p>
+    <button className='columnIcon half' onClick={() => showDetailsOf(id)}>
+      <p className='aboveLine'>{role}</p>
       <div className='lineH'></div>
-      <p className='belowLine'>{companyName}</p>
+      <p className='belowLine'>{company}</p>
       <div className='extraInfo'>
         <div className='topic'>
           <img src={clock} alt='Horas diárias' />

@@ -4,8 +4,12 @@ import '../../images/jobOffers.svg'
 import '../../images/handWithPencil.svg'
 import '../../images/reportEvaluation.svg'
 import '../../images/dataManagement.svg'
+import buttonsToShow from '../../data/teacherButtons.json'
 
-export function Sidebar({ logOut, changeServiceOnScreen, buttonsToShow }) {
+export function Sidebar({ logOut }) {
+  function changeServiceOnScreen(service) {
+    location.pathname = '/' + service
+  }
   const buttonsList = [];
   buttonsToShow.forEach((button) => {
     buttonsList.push(
@@ -22,7 +26,7 @@ export function Sidebar({ logOut, changeServiceOnScreen, buttonsToShow }) {
         {buttonsList}
       </div>
       <div className='logOut'>
-        <button onClick={() => logOut(false)}>&lt; Sair</button>
+        <button onClick={logOut}>&lt; Sair</button>
       </div>
     </div>
   )

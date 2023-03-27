@@ -1,8 +1,22 @@
-import { JobIcon } from './jobIcon';
 import jobs from '../../data/jobs.json'
 
-export function JobOffers({ filterText, filterData, setJobDetailed }) {
+import { useState } from 'react';
+import { JobIcon } from './jobIcon';
+import { Sidebar } from '../mainPage/sidebar';
+import { Header } from '../mainPage/header';
+
+export function JobOffers({ logOut }) {
   const listOfJobsToShow = [];
+  const [filterText, setFilterText] = useState('')
+  const [filterData, setFilterData] = useState({
+    "minWage": '',
+    "showFlexibe": true,
+    "showHybrid": true,
+    "showInPerson": true,
+    "minVacancies": '',
+    "dailyHours": '',
+    "address": 'anyAddress'
+  })
   jobs.forEach((job) => {
     if(
       job.salary < filterData.minWage
@@ -21,29 +35,47 @@ export function JobOffers({ filterText, filterData, setJobDetailed }) {
     }
     listOfJobsToShow.push(
       <JobIcon 
-        jobId={job.id}
-        jobRole={job.role}
-        companyName={job.company_name}
+        id={job.id}
+        role={job.role}
+        company={job.company_name}
         dailyHours={job.daily_hours}
         vacancies={job.vacancies}
         address={job.address}
         physicality={job.physicality}
-        showDetailsOf={setJobDetailed}
       />
     )
   })
 
   if(listOfJobsToShow.length === 0) {
     return (
-      <div className='grid'>
-        Não há vagas disponíveis com este filtro
+      <div>
+        <Sidebar logOut={logOut} />
+        <div className='page'>
+          <Header />
+          <div className='grid'>
+            <h1>Não há vagas disponíveis com este filtro</h1>
+          </div>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className='grid'>
-      {listOfJobsToShow}
+    <div>
+      <Sidebar
+        logOut={logOut}
+      />
+      <div className='page'>
+        <Header 
+          serviceOnScreen={location.pathname.split('/')[1]}
+          filterText={filterText} 
+          onFilterTextChange={setFilterText}
+          onFilterDataChange={setFilterData}
+        />
+        <div className='grid'>
+          {listOfJobsToShow}
+        </div>
+      </div>
     </div>
   )
 }

@@ -25,14 +25,14 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
 
   const handleOpen = () => {
     var addressList = []
-    var addressOptions = [<option value='anyAddress' selected={address === 'anyAddress'}>Indiferente</option>]
+    var addressOptions = [<option value='anyAddress'>Indiferente</option>]
     jobs.forEach((job) => {
       if(addressList.indexOf(job.address) === -1) {
         addressList.push(
           job.address
         )
         addressOptions.push(
-          <option value={job.address} selected={address === job.address}>{job.address}</option>
+          <option value={job.address}>{job.address}</option>
         )
       }
     })
@@ -62,6 +62,7 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
     setMinVacancies('')
     setDailyHours('')
     setAddress('anyAddress')
+    setOpen(false)
     onFilterDataChange({
       "minWage": minWage,
       "showFlexibe": showFlexibe,
@@ -71,17 +72,12 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
       "dailyHours": dailyHours,
       "address": address
     })
-    setOpen(false)
   }
 
   const onNumberChange = (whereToChange, value) => {
     if(value >= 0) {
       whereToChange(value)
     }
-  }
-
-  if(serviceOnScreen !== 'jobOffers') {
-    return
   }
 
   return (
@@ -121,14 +117,14 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
                   type='checkbox'
                   onClick={() => setShowHybrid(!(showHybrid))}
                   id='hybrid'
-                  checked={showHybrid}
+                  defaultChecked={showHybrid}
                 />
                 <label for='hybrid'>Híbrido</label>
               </div>
               <div className='checkBoxes'>
                 <input
                   type='checkbox'
-                  onClick={() => setShowInPerson(!showInPerson)}
+                  onChange={() => setShowInPerson(!showInPerson)}
                   id='in-person'
                   checked={showInPerson}
                 />
@@ -160,14 +156,18 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
             <div className='lineH' />
             <li>
               <p>Endereço</p>
-              <select id='addressSelect' onChange={(e) => setAddress(e.target.value)}>
+              <select
+                id='addressSelect'
+                defaultValue={address}
+                onChange={(e) => setAddress(e.target.value)}
+              >
                 {possibleAddress}
               </select>
             </li>
           </ul>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleReset} >Resetar</Button>
+          <Button onClick={handleReset}>Resetar</Button>
           <Button onClick={handleConfirm}>Filtrar</Button>
         </DialogActions>
       </Dialog>

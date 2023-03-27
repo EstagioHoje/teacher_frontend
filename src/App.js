@@ -1,41 +1,131 @@
-import { useState } from 'react';
-import { render } from 'react-dom';
-
-import { Page } from './pages/mainPage/page';
-import { Sidebar } from './pages/mainPage/sidebar';
-import { InitialScreen } from './pages/login/initialScreen';
+import { useState, useEffect } from 'react';
+import { createRoot } from "react-dom/client";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
 
 import './App.css';
-import logo from './images/logo.svg'
-import teacherButtons from './data/teacherButtons.json'
+
+import { LoginScreen } from './pages/login/loginScreen';
+import { ProtectedRoute } from './components/protectedRoute';
+import { JobOffers } from './pages/jobs/jobOffers';
+import { DetailedJob } from './pages/jobs/detailedJob';
+import { ContractApproval } from './pages/contracts/contractApproval';
+import { DetailedContract } from './pages/contracts/detailedContract';
+import { ReportEvaluation } from './pages/reports/reportEvaluation';
+import { DetailedReport } from './pages/reports/detailedReport';
+import { DataManagement } from './pages/dataChange/dataManagement';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [service, setService] = useState('jobOffers');
+  const [authorized, setAuthorized] = useState(JSON.parse(sessionStorage.getItem("isAuthorized")));
 
-  if(isLoggedIn) {
-    return (
-      <div>
-        <Sidebar
-          logOut={setIsLoggedIn}
-          changeServiceOnScreen={setService}
-          buttonsToShow={teacherButtons}
-        />
-        <div className="page">
-          <Page serviceOnScreen={service} />
-        </div>
-      </div>
-    )
-  } else {
-    return (
-      <div className='logInBackground'>
-        <div className='popup'>
-          <img src={logo} alt="Estágio Hoje" />
-          <InitialScreen logIn={setIsLoggedIn}/>
-        </div>
-      </div>
-    )
+  useEffect(() => {
+    function handleStorage() {
+      console.log(localStorage.getItem("isAuthorized"))
+      setAuthorized(JSON.parse(localStorage.getItem("isAuthorized")))
+      console.log('tipo:')
+      console.log(typeof authorized)
+    }
+    window.addEventListener('storage', handleStorage);
+    return _ => {
+      window.removeEventListener('storage', handleStorage);
+    }
+  })
+
+  const logIn = () => {
+    setAuthorized(true)
+    location.pathname = '/jobOffers'
+    sessionStorage.setItem('isAuthorized', true)
   }
+
+  const logOut = () => {
+    setAuthorized(false)
+    sessionStorage.setItem('isAuthorized', false)
+  }
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route 
+          path='/'
+          element={<Navigate to={'/login'} replace />}
+        />
+        <Route
+          path='/login'
+          element={
+            <LoginScreen logIn={logIn} />
+          }
+        />
+        <Route
+          path='/jobOffers'
+          element={
+            <ProtectedRoute
+              isAuthorized={authorized}
+              children={<JobOffers logOut={logOut} />}
+            />
+          }
+        />
+        <Route
+          path='/jobOffers/:jobId'
+          element={
+            <ProtectedRoute
+              isAuthorized={authorized}
+              children={<DetailedJob logOut={logOut} />}
+            />
+          }
+        />
+        <Route
+          path='/contractApproval'
+          element={
+            <ProtectedRoute
+              isAuthorized={authorized}
+              children={<ContractApproval logOut={logOut} />}
+            />
+          }
+        />
+        <Route
+          path='/contractApproval/:contractId'
+          element={
+            <ProtectedRoute
+              isAuthorized={authorized}
+              children={<DetailedContract logOut={logOut}/>}
+            />
+          }
+        />
+        <Route
+          path='/reportEvaluation'
+          element={
+            <ProtectedRoute
+              isAuthorized={authorized}
+              children={<ReportEvaluation logOut={logOut} />}
+            />
+          }
+        />
+        <Route
+          path='/reportEvaluation/:reportId'
+          element={
+            <ProtectedRoute
+              isAuthorized={authorized}
+              children={<DetailedReport logOut={logOut} />}
+            />
+          }
+        />
+        <Route
+          path='/dataManagement'
+          element={
+            <ProtectedRoute
+              isAuthorized={authorized}
+              children={<DataManagement logOut={logOut} />}
+            />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-render(<App />, document.getElementById('main'));
+const root = createRoot(document.getElementById('main'));
+root.render(<App />);

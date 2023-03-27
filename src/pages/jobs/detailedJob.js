@@ -1,16 +1,18 @@
 import './detailedJob.css'
-
 import jobs from '../../data/jobs.json'
-
-import { physicalityTranslation } from '../../components/physicalityTranslation'
-
 import coin from '../../images/coin.svg'
 import star from '../../images/star.svg'
 import clock from '../../images/clock.svg'
 import locationPin from '../../images/locationPin.svg'
 import jobVacancies from '../../images/jobVacancies.svg'
 
-export function DetailedJob({ jobId }) {
+import { Header } from '../mainPage/header'
+import { useParams } from 'react-router-dom'
+import { Sidebar } from '../mainPage/sidebar'
+import { physicalityTranslation } from '../../components/physicalityTranslation'
+
+export function DetailedJob({ logOut }) {
+  const jobId = useParams().jobId
   const job = jobs[jobId]
 
   function Description() {
@@ -35,54 +37,58 @@ export function DetailedJob({ jobId }) {
   
   return (
     <div>
-      <div className='detailedHeader'>
-        <h1>{job.role}</h1>
-        <div className='lineH' />
-        <h2>{job.company_name}</h2>
-      </div>
-      <div className='centerPage'>
-        <div className='detailedDescription'>
-          <h2>Sobre a vaga</h2>
-          <Description />
+      <Sidebar logOut={logOut} />
+      <div className='page'>
+        <Header />
+        <div className='detailedHeader'>
+          <h1>{job.role}</h1>
           <div className='lineH' />
-          <h2>Requisitos</h2>
-          <Requirements className='requirements' />
+          <h2>{job.company_name}</h2>
         </div>
-        <section className='details'>
-          <h1>Detalhes da vaga:</h1>
-          <div className='lineH' />
-          <div className='detail'>
-            <img src={clock} alt='horas por dia'/>
-            <p>Horas por dia: </p>
-            <span>{job.daily_hours} h</span>
+        <div className='centerPage'>
+          <div className='detailedDescription'>
+            <h2>Sobre a vaga</h2>
+            <Description />
+            <div className='lineH' />
+            <h2>Requisitos</h2>
+            <Requirements className='requirements' />
           </div>
-          <div className='detail'>
-            <img src={locationPin} alt='endereco' />
-            <p>Endereço: </p>
-            <span>{job.address}</span>
-          </div>
-          <div className='detail'>
-            <img src={jobVacancies} alt='vagas disponiveis' />
-            <p>Vagas disponíveis: </p>
-            <span>{job.vacancies}</span>
-          </div>
-          <div className='detail'>
-            <img src={coin} alt='salario' />
-            <p>Salário: </p>
-            <span>R$ {job.salary}</span>
-          </div>
-          <div className='detail'>
-            {physicalityTranslation(job.physicality)[0]}
-            <p>Distância: </p>
-            <span>{physicalityTranslation(job.physicality)[1]}</span>
-          </div>
-          <div className='detail'>
-            <img src={star} alt='nota' />
-            <p>Nota da empresa :</p>
-            <span>{job.grade}</span>
-          </div>
-          <button className='apply'>Aplicar!</button>
-        </section>
+          <section className='details'>
+            <h1>Detalhes da vaga:</h1>
+            <div className='lineH' />
+            <div className='detail'>
+              <img src={clock} alt='horas por dia'/>
+              <p>Horas por dia: </p>
+              <span>{job.daily_hours} h</span>
+            </div>
+            <div className='detail'>
+              <img src={locationPin} alt='endereco' />
+              <p>Endereço: </p>
+              <span>{job.address}</span>
+            </div>
+            <div className='detail'>
+              <img src={jobVacancies} alt='vagas disponiveis' />
+              <p>Vagas disponíveis: </p>
+              <span>{job.vacancies}</span>
+            </div>
+            <div className='detail'>
+              <img src={coin} alt='salario' />
+              <p>Salário: </p>
+              <span>R$ {job.salary}</span>
+            </div>
+            <div className='detail'>
+              {physicalityTranslation(job.physicality)[0]}
+              <p>Distância: </p>
+              <span>{physicalityTranslation(job.physicality)[1]}</span>
+            </div>
+            <div className='detail'>
+              <img src={star} alt='nota' />
+              <p>Nota da empresa :</p>
+              <span>{job.grade}</span>
+            </div>
+            <button className='apply'>Aplicar!</button>
+          </section>
+        </div>
       </div>
     </div>
   )

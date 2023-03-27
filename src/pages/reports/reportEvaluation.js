@@ -1,8 +1,13 @@
-import { ReportIcon } from "./reportIcon";
 import reports from '../../data/reports.json'
 
-export function ReportEvaluation({ filterText, setReportDetailed }) {
+import { useState } from 'react';
+import { Header } from "../mainPage/header";
+import { Sidebar } from "../mainPage/sidebar";
+import { InlineIcon } from '../../components/inlineIcon';
+
+export function ReportEvaluation({ logOut }) {
   const listOfReportsToShow = [];
+  const [filterText, setFilterText] = useState('')
   reports.forEach((report) => {
     if(
       (report.company_name.toLowerCase().indexOf(filterText.toLowerCase()) === -1)
@@ -12,18 +17,27 @@ export function ReportEvaluation({ filterText, setReportDetailed }) {
       return;
     }
     listOfReportsToShow.push(
-      <ReportIcon 
+      <InlineIcon 
         id={report.id}
         student={report.student_name}
         company={report.company_name}
-        grade={report.grade}
-        showDetailsOf={setReportDetailed}
+        status={report.grade}
       />
     )
   })
+  
   return (
-    <div className='grid'>
-      {listOfReportsToShow}
+    <div>
+      <Sidebar logOut={logOut} />
+      <div className='page'>
+        <Header 
+          filterText={filterText} 
+          onFilterTextChange={setFilterText}
+        />
+        <div className='grid'>
+          {listOfReportsToShow}
+        </div>
+      </div>
     </div>
   )
 }

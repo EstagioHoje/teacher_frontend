@@ -1,7 +1,9 @@
 import './dataManagement.css'
 import teacher from '../../data/teacherData.json'
+import { Header } from '../mainPage/header'
+import { Sidebar } from '../mainPage/sidebar'
 
-export function DataManagement() {
+export function DataManagement({ logOut }) {
   const onSubmit = () => {
     // eslint-disable-next-line
     var items = [
@@ -17,52 +19,56 @@ export function DataManagement() {
 
   return (
     <div>
-      <div className='dataLine'>
-        <h2>Nome: </h2>
-        <input
-          id='name'
-          defaultValue={teacher.name}
-        />
-      </div>
-      <div className='dataLine'>
-        <h2>E-mail: </h2>
-        <input 
-          id='email'
-          type='email'
-          defaultValue={teacher.email}
-        />
-      </div>
-      <div className='dataLine'>
-        <h2>Universidade: </h2>
-        <input 
-          id='university'
-          defaultValue={teacher.university}
-        />
-      </div>
-      <div className='dataLine'>
-        <h2>Unidade: </h2>
-        <input 
-          id='school'
-          defaultValue={teacher.school}
-        />
-      </div>
-      <div className='dataLine'>
-        <h2>Departamento:</h2>
-        <input 
-          id='department'
-          defaultValue={teacher.department}
-        />
-      </div>
-      <div className='dataLine'>
-        <h2>ID na universidade:</h2>
-        <input 
-          id='universityId'
-          defaultValue={teacher.universityId}
-        />
-      </div>
-      <div className='rowButtons'>
-        <button className='endButton' onClick={onSubmit}>Salvar</button>
-        <button className='endButton reject'>Descartar</button>
+      <Sidebar logOut={logOut} />
+      <div className='page'>
+        <Header />
+        <div className='dataLine'>
+          <h2>Nome: </h2>
+          <input
+            id='name'
+            defaultValue={teacher.name}
+          />
+        </div>
+        <div className='dataLine'>
+          <h2>E-mail: </h2>
+          <input 
+            id='email'
+            type='email'
+            defaultValue={teacher.email}
+          />
+        </div>
+        <div className='dataLine'>
+          <h2>Universidade: </h2>
+          <input 
+            id='university'
+            defaultValue={teacher.university}
+          />
+        </div>
+        <div className='dataLine'>
+          <h2>Unidade: </h2>
+          <input 
+            id='school'
+            defaultValue={teacher.school}
+          />
+        </div>
+        <div className='dataLine'>
+          <h2>Departamento:</h2>
+          <input 
+            id='department'
+            defaultValue={teacher.department}
+          />
+        </div>
+        <div className='dataLine'>
+          <h2>ID na universidade:</h2>
+          <input 
+            id='universityId'
+            defaultValue={teacher.universityId}
+          />
+        </div>
+        <div className='rowButtons'>
+          <button className='endButton' onClick={onSubmit}>Salvar</button>
+          <button className='endButton reject'>Descartar</button>
+        </div>
       </div>
     </div>
   )
