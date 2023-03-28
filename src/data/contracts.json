@@ -22,6 +22,7 @@
       "cnpj": "123456789",
       "address": "Rua dos bobos",
       "number": 0,
+      "complement": "",
       "city": "São Paulo",
       "state": "SP",
       "cep": "12345678",

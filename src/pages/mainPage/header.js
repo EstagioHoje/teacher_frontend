@@ -36,9 +36,7 @@ export function Header({ filterText, onFilterTextChange, onFilterDataChange }) {
   
   return (
     <header>
-      <div className='header'>
-        <h1>{services[location.pathname.split('/')[1]].text}</h1>
-      </div>
+      <h1 className='header'>{services[location.pathname.split('/')[1]].text}</h1>
       <div className='search'>
         {searchBar}
       </div>

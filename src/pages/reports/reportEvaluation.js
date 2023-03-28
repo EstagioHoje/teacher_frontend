@@ -1,13 +1,28 @@
-import reports from '../../data/reports.json'
+// import reports from '../../data/reports.json'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from "../mainPage/header";
 import { Sidebar } from "../mainPage/sidebar";
 import { InlineIcon } from '../../components/inlineIcon';
+import { getAllReports } from '../../actions/teacher';
 
 export function ReportEvaluation({ logOut }) {
   const listOfReportsToShow = [];
+  const [reports, setReports] = useState('')
   const [filterText, setFilterText] = useState('')
+
+  useEffect(() => {
+    (async () => {
+      let reports = await getAllReports()
+      if(reports !== null) {
+        if(reports.data[0] !== null) {
+          setReports(reports.data[0])
+        }
+      }
+    }
+    )()
+  }, []);
+
   reports.forEach((report) => {
     if(
       (report.company_name.toLowerCase().indexOf(filterText.toLowerCase()) === -1)

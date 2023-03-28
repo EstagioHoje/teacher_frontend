@@ -67,6 +67,15 @@ function App() {
               children={<JobOffers logOut={logOut} />}
             />
           }
+          loader={async () => {
+            let jobs = await getAllJobOffers()
+            if(jobs !== null) {
+              if(jobs.data[0] !== null) {
+                // setJobs(jobs.data[0])
+                return jobs.data[0];
+              }
+            }
+          }}
         />
         <Route
           path='/jobOffers/:jobId'

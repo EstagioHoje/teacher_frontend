@@ -1,21 +1,46 @@
+// import teacher from '../../data/teacherData.json'
 import './dataManagement.css'
-import teacher from '../../data/teacherData.json'
+
 import { Header } from '../mainPage/header'
 import { Sidebar } from '../mainPage/sidebar'
+import { useEffect, useState } from 'react'
+import { getTeacher, putTeacher } from '../../actions/teacher'
 
 export function DataManagement({ logOut }) {
+  const [teacher, setTeacher] = useState('')
   const onSubmit = () => {
-    // eslint-disable-next-line
-    var items = [
-      document.getElementById('name').value,
+    putTeacher(
       document.getElementById('email').value,
-      document.getElementById('university').value,
+      document.getElementById('name').value,
+      teacher.cpf,
       document.getElementById('department').value,
       document.getElementById('school').value,
-      document.getElementById('universityId').value,
-    ]
-    // return items
+      document.getElementById('university').value,
+      document.getElementById('universityId').value
+    )
   }
+
+  const resetChanges = () => {
+    document.getElementById('email').value = teacher.email,
+    document.getElementById('name').value = teacher.name,
+    document.getElementById('department').value = teacher.department,
+    document.getElementById('school').value = teacher.school,
+    document.getElementById('university').value = teacher.university,
+    document.getElementById('universityId').value = teacher.university_id
+  }
+
+  useEffect(() => {
+    (async () => {
+      let teacher = await getTeacher()
+      console.log('' + teacher)
+      if(teacher !== null) {
+        if(teacher.data[0] !== null) {
+          setTeacher(teacher.data[0])
+        }
+      }
+    }
+    )()
+  }, []);
 
   return (
     <div>
@@ -62,12 +87,12 @@ export function DataManagement({ logOut }) {
           <h2>ID na universidade:</h2>
           <input 
             id='universityId'
-            defaultValue={teacher.universityId}
+            defaultValue={teacher.university_id}
           />
         </div>
         <div className='rowButtons'>
-          <button className='endButton' onClick={onSubmit}>Salvar</button>
-          <button className='endButton reject'>Descartar</button>
+          <button onClick={onSubmit} className='endButton'>Salvar</button>
+          <button onClick={resetChanges} className='endButton reject'>Descartar</button>
         </div>
       </div>
     </div>

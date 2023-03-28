@@ -1,13 +1,28 @@
-import contracts from '../../data/contracts.json'
+// import contracts from '../../data/contracts.json'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "../mainPage/header";
 import { Sidebar } from "../mainPage/sidebar";
+import { getAllContracts } from '../../actions/teacher';
 import { InlineIcon } from "../../components/inlineIcon";
 
 export function ContractApproval({ logOut }) {
   const listOfContractsToShow = [];
   const [filterText, setFilterText] = useState('')
+  const [contracts, setContracts] = useState();
+
+  useEffect(() => {
+    (async () => {
+      let contracts = await getAllContracts()
+      if(contracts !== null) {
+        if(contracts.data[0] !== null) {
+          setContracts(contracts.data[0])
+        }
+      }
+    }
+    )()
+  }, []);
+
   contracts.forEach((contract) => {
     if(
       contract.company_data.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1

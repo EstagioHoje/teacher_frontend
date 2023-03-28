@@ -12,14 +12,14 @@ import menu from '../../images/menu.svg'
 import './jobFilter.css'
 import jobs from '../../data/jobs.json'
 
-export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
+export default function JobFilter({ onFilterDataChange }) {
   const [possibleAddress, setPossibleAddress] = useState([])
   const [minWage, setMinWage] = useState('')
   const [showFlexibe, setShowFlexibe] = useState(true)
   const [showHybrid, setShowHybrid] = useState(true)
   const [showInPerson, setShowInPerson] = useState(true)
   const [minVacancies, setMinVacancies] = useState('')
-  const [dailyHours, setDailyHours] = useState('')
+  const [weeklyHours, setWeeklyHours] = useState('')
   const [address, setAddress] = useState('anyAddress')
   const [open, setOpen] = useState(false)
 
@@ -49,7 +49,7 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
       "showHybrid": showHybrid,
       "showInPerson": showInPerson,
       "minVacancies": minVacancies,
-      "dailyHours": dailyHours,
+      "weeklyHours": weeklyHours,
       "address": address
     })
   };
@@ -60,7 +60,7 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
     setShowHybrid(true)
     setShowInPerson(true)
     setMinVacancies('')
-    setDailyHours('')
+    setWeeklyHours('')
     setAddress('anyAddress')
     setOpen(false)
     onFilterDataChange({
@@ -69,7 +69,7 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
       "showHybrid": showHybrid,
       "showInPerson": showInPerson,
       "minVacancies": minVacancies,
-      "dailyHours": dailyHours,
+      "weeklyHours": weeklyHours,
       "address": address
     })
   }
@@ -146,11 +146,11 @@ export default function JobFilter({ serviceOnScreen ,onFilterDataChange }) {
             <li>
               <p>Horas diárias</p>
               <input
-                id='dailyHours'
-                name='dailyHours'
+                id='weeklyHours'
+                name='weeklyHours'
                 type='numeric'
-                value={dailyHours}
-                onChange={(e) => onNumberChange(setDailyHours, e.target.value)}
+                value={weeklyHours}
+                onChange={(e) => onNumberChange(setWeeklyHours, e.target.value)}
               />
             </li>
             <div className='lineH' />

@@ -8,7 +8,7 @@ export function LoginScreen({ logIn }) {
         <img src={logo} alt="Estágio Hoje" />
         <div className='container'>
           <div className="popupForm">
-            <p>Usuário ou e-mail</p>
+            <p>CPF</p>
             <input id="full-name" name="full-name" type="text"></input>
             <p>Senha</p>
             <input id="password" name="password" type="text"></input>

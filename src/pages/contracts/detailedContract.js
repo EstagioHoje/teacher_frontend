@@ -1,12 +1,38 @@
 import './detailedContract.css'
-import contracts from '../../data/contracts.json'
+// import contracts from '../../data/contracts.json'
 import { Header } from "../mainPage/header";
 import { Sidebar } from "../mainPage/sidebar";
 import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { getContract, putContract } from '../../actions/teacher';
 
 export function DetailedContract({ logOut }) {
   const contractId = useParams().contractId
-  const contract = contracts[contractId]
+  const [contract, setContract] = useState('')
+
+  const validateContract = () => {
+    sendContract('Aprovado por ');
+  }
+
+  const rejectContract = () => {
+    sendContract('Rejeitado por ');
+  }
+
+  async function sendContract( approval ) {
+    putContract(contract.id, contract.student_data, contract.company_data, contract.duration, contract.start_date, contract.end_date, contract.weekly_hours, contract.salary, contract.transport_bonus, approval, contract.description)
+  }
+  
+  useEffect(() => {
+    (async () => {
+      let contract = await getContract(contractId)
+      if(contract !== null) {
+        if(contract.data[0] !== null) {
+          setContract(contract.data[0])
+        }
+      }
+    }
+    )()
+  }, []);
   
   return (
     <div>
@@ -81,8 +107,8 @@ export function DetailedContract({ logOut }) {
             <p>&emsp;{contract.internship_plan}</p>
           </div>
           <div className='rowButtons'>
-            <button className='endButton'>Assinar</button>
-            <button className='endButton reject'>Rejeitar</button>
+            <button onClick={validateContract} className='endButton'>Assinar</button>
+            <button onClick={rejectContract} className='endButton reject'>Rejeitar</button>
           </div>
         </div>
       </div>

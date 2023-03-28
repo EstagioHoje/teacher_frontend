@@ -5,7 +5,7 @@ import clock from '../../images/clock.svg'
 import locationPin from '../../images/locationPin.svg'
 import jobVacancies from '../../images/jobVacancies.svg'
 
-export function JobIcon({ id, role, company, dailyHours, vacancies, address, physicality }) {
+export function JobIcon({ id, role, company, weeklyHours, vacancies, address, physicality }) {
   
   function showDetailsOf(jobId) {
     location.pathname += ('/' + jobId)
@@ -17,8 +17,8 @@ export function JobIcon({ id, role, company, dailyHours, vacancies, address, phy
       <p className='belowLine'>{company}</p>
       <div className='extraInfo'>
         <div className='topic'>
-          <img src={clock} alt='Horas diárias' />
-          <p>{dailyHours}h</p>
+          <img src={clock} alt='Horas semanais' />
+          <p>{weeklyHours}h</p>
         </div>
         <div className='topic'>
           <img src={jobVacancies} alt='Vagas disponíveis' />

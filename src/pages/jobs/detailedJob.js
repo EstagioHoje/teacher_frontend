@@ -1,5 +1,5 @@
+// import jobs from '../../data/jobs.json'
 import './detailedJob.css'
-import jobs from '../../data/jobs.json'
 import coin from '../../images/coin.svg'
 import star from '../../images/star.svg'
 import clock from '../../images/clock.svg'
@@ -10,10 +10,24 @@ import { Header } from '../mainPage/header'
 import { useParams } from 'react-router-dom'
 import { Sidebar } from '../mainPage/sidebar'
 import { physicalityTranslation } from '../../components/physicalityTranslation'
+import { useEffect, useState } from 'react'
+import { getJobOffer } from '../../actions/teacher'
 
 export function DetailedJob({ logOut }) {
   const jobId = useParams().jobId
-  const job = jobs[jobId]
+  const [job, setJob] = useState('')
+
+  useEffect(() => {
+    (async () => {
+      let job = await getJobOffer(jobId)
+      if(job !== null) {
+        if(job.data[0] !== null) {
+          setJob(job.data[0])
+        }
+      }
+    }
+    )()
+  }, []);
 
   function Description() {
     const text = []
@@ -57,9 +71,9 @@ export function DetailedJob({ logOut }) {
             <h1>Detalhes da vaga:</h1>
             <div className='lineH' />
             <div className='detail'>
-              <img src={clock} alt='horas por dia'/>
-              <p>Horas por dia: </p>
-              <span>{job.daily_hours} h</span>
+              <img src={clock} alt='horas semanais'/>
+              <p>Horas semanais: </p>
+              <span>{job.weekly_hours} h</span>
             </div>
             <div className='detail'>
               <img src={locationPin} alt='endereco' />
@@ -86,7 +100,7 @@ export function DetailedJob({ logOut }) {
               <p>Nota da empresa :</p>
               <span>{job.grade}</span>
             </div>
-            <button className='apply'>Aplicar!</button>
+            {/* <button className='apply'>Aplicar!</button> */}
           </section>
         </div>
       </div>

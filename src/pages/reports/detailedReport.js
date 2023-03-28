@@ -1,15 +1,32 @@
 import './detailedReport.css'
-import reports from '../../data/reports.json'
+// import reports from '../../data/reports.json'
 
 import { useState } from 'react';
 import { Header } from '../mainPage/header';
 import { useParams } from 'react-router-dom';
 import { Sidebar } from '../mainPage/sidebar';
+import { getReport, putReport } from '../../actions/teacher';
 
 export function DetailedReport({ logOut }) {
   const reportId = useParams().reportId
-  const report = reports[reportId]
+  const [report, setReport] = useState('')
   const [grade, setGrade] = useState()
+
+  const submitGrade = async () => {
+    putReport(report.id, report.student_name, report.student_full_name, report.company_name, report.student_report, report.company_report, grade)
+  }
+
+  useEffect(() => {
+    (async () => {
+      let report = await getReport(reportId)
+      if(report !== null) {
+        if(report.data[0] !== null) {
+          setReport(report.data[0])
+        }
+      }
+    }
+    )()
+  }, []);
 
   function Report({text}) {
     var paragraphs = []
@@ -55,7 +72,7 @@ export function DetailedReport({ logOut }) {
                 }
               }
               />
-            <button>Salvar nota</button>
+            <button onClick={submitGrade}>Salvar nota</button>
           </div>
         </div>
       </div>
