@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-} from "react-router-dom";
-import useLocalStorage from 'react-use-localstorage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import EmpresaReadUpdateDelete from "./pages/EmpresaCrud/EmpresaReadUpdateDelete";
-import EmpresaCreate from "./pages/EmpresaCrud/EmpresaCreate";
-import EmpresaLogin from "./pages/EmpresaLogin/EmpresaLogin";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+import ProfessorReadUpdate from "./pages/ProfessorCrud/ProfessorReadUpdate";
+
+import VagaRead from "./pages/VagasCrud/VagaRead";
+import VagaReadComplete from "./pages/VagasCrud/VagaReadComplete";
+
+import RelatorioRead from "./pages/RelatorioCrud/RelatorioRead";
+import RelatorioCreate from "./pages/RelatorioCrud/RelatorioCreate";
+
+import AssinaturaRead from "./pages/AssinaturaCrud/AssinaturaRead";
+import AssinaturaCreate from "./pages/AssinaturaCrud/AssinaturaCreate";
+import AssinaturaReadComplete from "./pages/AssinaturaCrud/AssinaturaReadComplete";
+
+import AlunoLogin from "./pages/AlunoLogin/AlunoLogin";
+
+import './App.css';
 
 const App = () => {
   const [isAuthorized, setAuthorized] = useState(JSON.parse(localStorage.getItem("isAuthorized")));
 
   useEffect(() => {
     function handleStorage() {
-      console.log(localStorage.getItem("isAuthorized"))
+      console.log(localStorage.getItem("isAuthorized"));
       setAuthorized(JSON.parse(localStorage.getItem("isAuthorized")))
-      console.log(typeof isAuthorized)
+      console.log(typeof isAuthorized);
     }
 
     window.addEventListener('storage', handleStorage);
@@ -33,18 +40,59 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/updateEmpresa" element={
-          <ProtectedRoute isAuthorized={isAuthorized} children={<EmpresaReadUpdateDelete className="teste" />} />
+
+
+        <Route path="/assinatura/read" element={
+          <ProtectedRoute isAuthorized={isAuthorized}
+            children={<AssinaturaReadComplete
+              setAuthorized={setAuthorized} className="teste" />} />
         } />
-        <Route path="/createEmpresa" element={<EmpresaCreate className="teste" />} />
-        <Route path="/login" element={<EmpresaLogin isAuthorized={isAuthorized} className="teste" />} />
+        <Route path="/assinatura" element={
+          <ProtectedRoute isAuthorized={isAuthorized}
+            children={<AssinaturaRead
+              setAuthorized={setAuthorized} className="teste" />} />
+        } />
+
+
+        <Route path="/relatorio/read" element={
+          <ProtectedRoute isAuthorized={isAuthorized}
+            children={<RelatorioCreate
+              setAuthorized={setAuthorized} className="teste" />} />
+        } />
+        <Route path="/relatorio/create" element={
+          <ProtectedRoute isAuthorized={isAuthorized}
+            children={<RelatorioCreate
+              setAuthorized={setAuthorized} className="teste" />} />
+        } />
+        <Route path="/relatorio" element={
+          <ProtectedRoute isAuthorized={isAuthorized}
+            children={<RelatorioRead
+              setAuthorized={setAuthorized} className="teste" />} />
+        } />
+
+
+        <Route path="/vagas/read" element={
+          <ProtectedRoute isAuthorized={isAuthorized} children={<VagaReadComplete
+            setAuthorized={setAuthorized} className="teste" />} />
+        } />
+        <Route path="/vagas" element={
+          <ProtectedRoute isAuthorized={isAuthorized} children={<VagaRead
+            setAuthorized={setAuthorized} className="teste" />} />
+        } />
+
+
+        <Route path="/conta" element={
+          <ProtectedRoute isAuthorized={isAuthorized}
+            children={<ProfessorReadUpdate
+              setAuthorized={setAuthorized} className="teste" />} />
+        } />
+
+        <Route path="/login" element={<AlunoLogin isAuthorized={isAuthorized} setAuthorized={setAuthorized} className="teste" />} />
+        <Route path="/" element={<AlunoLogin isAuthorized={isAuthorized} setAuthorized={setAuthorized} className="teste" />} />
+
       </Routes>
     </BrowserRouter>
   );
 };
 
 render(<App />, document.getElementById("main"));
-
-/*    <ProtectedRoute children={<EmpresaReadUpdateDelete className="teste" />} teste={item}></ProtectedRoute> 
-
-*/
