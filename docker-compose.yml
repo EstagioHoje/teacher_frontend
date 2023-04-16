@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  frontend_website_template2:
-    container_name: frontend_website_template2
+  frontend_teacher:
+    container_name: frontend_teacher
     build: .
     ports:
       - 1236:1234
