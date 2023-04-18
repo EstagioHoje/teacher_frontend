@@ -3,7 +3,6 @@ import { ApiPut } from "./server_core/api_put";
 import { ApiPost } from "./server_core/api_post";
 import { ApiDelete } from "./server_core/api_delete";
 import { endpoints } from "./server_core/endpoint";
-import { ApiDelet } from "./server_core/api_delete";
 
 export const aluno_get_search = async (cpf) => {
     const endp = endpoints.ALUNO_GET + "/?cpf=" + cpf;

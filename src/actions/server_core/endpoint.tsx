@@ -17,11 +17,18 @@ export const endpoints = {
     RELATORIO_GET_ALL_CPF: 'report/get/all_cpf',
     RELATORIO_POST: 'report/post/',
 
-    ALUNO_GET: 'teacher/get',
-    ALUNO_POST: 'teacher/post/',
-    ALUNO_PUT: 'teacher/put/',
-    ALUNO_DELETE: 'teacher/delete',
-    ALUNO_GET_ALL: 'teacher/get/all',
+    ALUNO_GET: 'student/get',
+    ALUNO_GET_ALL: 'student/get/all',
+    ALUNO_GET_COMPANY: 'student/get_company',
+    ALUNO_POST: 'student/post/',
+    ALUNO_PUT: 'student/put/',
+    ALUNO_DELETE: 'student/delete',
+
+    PROFESSOR_GET: 'teacher/get',
+    PROFESSOR_POST: 'teacher/post/',
+    PROFESSOR_PUT: 'teacher/put/',
+    PROFESSOR_DELETE: 'teacher/delete',
+    PROFESSOR_GET_ALL: 'teacher/get/all',
 
     EMPRESA_GET: 'company/get',
     EMPRESA_POST: 'company/post/',
@@ -31,7 +38,7 @@ export const endpoints = {
   };
 
 export const api_links = {
-  BACKEND: 'http://ec2-54-146-77-15.compute-1.amazonaws.com:8000',
+  BACKEND: 'http://ec2-52-201-162-139.compute-1.amazonaws.com:8000/:8000',
   FRONTEND: 'http://localhost:1234'
 };
 
