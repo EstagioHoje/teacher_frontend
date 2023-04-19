@@ -10,7 +10,7 @@ export const endpoints = {
 
   ASSINATURA_GET: 'contract/get',
   ASSINATURA_PUT: 'contract/put',
-  ASSINATURA_POST: 'contract/post',
+  ASSINATURA_POST: 'contract/post/',
   ASSINATURA_GET_ALL: 'contract/get/all',
   ASSINATURA_GET_ALL_CPF: 'contract/get/all_cpf',
   ASSINATURA_GET_ALL_UNI: 'contract/get/all_uni',
