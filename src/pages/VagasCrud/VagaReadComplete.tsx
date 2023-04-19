@@ -37,7 +37,7 @@ export default function VagaReadComplete({ setAuthorized }) {
   const [state, setState] = useState('');
   const params = new URLSearchParams(window.location.search);
   const [id, setId] = useState('')
-  const cpf = sessionStorage.getItem("cpf")
+  const [cpf, setCPF] = useState(sessionStorage.getItem("cpf"));
   useEffect(() => {
     function handleResize() {
       setWindowHeight(window.innerHeight)

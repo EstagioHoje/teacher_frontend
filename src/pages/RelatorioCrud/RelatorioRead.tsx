@@ -12,68 +12,68 @@ import Link from '@mui/material/Link';
 import { Collapse } from '@mui/material';
 
 import { Sidebar } from '../../components/sidebar/sidebar';
-import { relatorio_get_all_cpf } from '../../actions/Relatorio';
+import { aluno_get_search, relatorio_get_all_cpf, relatorio_get_all_uni } from '../../actions/Relatorio';
+import { teacher_get } from '../../actions/Professor';
 
 
 export default function RelatorioRead({ setAuthorized }) {
-    const [expanded, setExpanded] = useState(true);
-    const navigate = useNavigate();
-    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [cnpj, setCnpj] = useState(localStorage.getItem("cnpj"))
+    const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [rows, setRows] = useState([])
-    const [cpf, setCPF] = useState(localStorage.getItem("cpf"));
+    const [cpf, setCpf] = useState(sessionStorage.getItem("cpf"))
 
+    const columns: GridColDef[] = [{
+        field: 'id',
+        headerName: '',
+        width: 300,
+        renderCell: (params) => (
+            <Link component={RouterLink} to={`/relatorio/create?id=${params.value}`}>
+                Acessar
+            </Link>),
+    },{
+        field: 'student_name',
+        headerName: 'Aluno',
+        width: 300
+    },{
+        field: 'company_name',
+        headerName: 'Empresa',
+        width: 250
+    },{
+        field: 'start_date',
+        headerName: 'Inicio do estágio',
+        width: 180
+    },{
+        field: 'end_date',
+        headerName: 'Término do estágio',
+        width: 180
+    }];
 
-    const columns: GridColDef[] = [
-        {
-            field: 'id', headerName: 'id', width: 300,renderCell: (params) => (
-                <Link component={RouterLink} to={`/relatorio/create?id=${params.value}`}>
-                    {params.value}
-                </Link>),
-        },
-        /*{
-            field: 'student_name', headerName: 'Nome do estágiario', width: 300
-        },
-        {
-            field: 'student_cpf', headerName: 'CPF do estágiario', width: 250
-        },*/
-        {
-            field: 'start_date', headerName: 'Inicio do estágio', width: 180
-        },
-        {
-            field: 'end_date', headerName: 'Fim do estágio', width: 180
-        },
-    ];
     useEffect(() => {
-
-        (async () => {
-            let info = await relatorio_get_all_cpf(cpf);
-            console.log(info);
-            console.log(info.data);
-            if (info != null) {
-                if (info.data != null) {
-                    if (info.data[0] != null) {
-                        const teste = info.data.reduce(function(result,element) {
-                            const arrayRelatorio = {};
-                            arrayRelatorio.id = element.id;
-                            //arrayRelatorio.student_name = element.student_name;
-                            //arrayRelatorio.student_cpf = element.student_cpf;
-                            //arrayRelatorio.start_date = element.contract_data;
-                            //arrayRelatorio.end_date = element.contract_data;
-                            result.push(arrayRelatorio)
-                            return result;
-                        },[]);
-                        console.log(teste)
-                        setRows(teste);
-                    }
-                }
-
+      (async () => {
+        let teacher = await teacher_get(cpf);
+        let uni = teacher.data.data[0].college;
+        let request = await relatorio_get_all_uni(uni);
+        if (request != null) {
+          if (request.data != null) {
+            if (request.data[0] != null) {
+              const listOfRelatorios = request.data.reduce(async function(result,element) {
+                const arrayRelatorio = {};
+                let student = await aluno_get_search(element.student_cpf)
+                arrayRelatorio.student_name = student.data.data[0].name
+                let company = await aluno_get_search(element.company_cnpj)
+                arrayRelatorio.company_name = company.data.data[0].name
+                arrayRelatorio.start_date = element.contract_data;
+                arrayRelatorio.end_date = element.contract_data;
+                result.push(arrayRelatorio)
+                return result;
+              },[]);
+              console.log(listOfRelatorios)
+              setRows(listOfRelatorios);
             }
-
+          }
         }
-        )()
-
+      }
+      )()
     }, []);
 
 
@@ -82,9 +82,7 @@ export default function RelatorioRead({ setAuthorized }) {
             setWindowHeight(window.innerHeight)
             setWindowWidth(window.innerWidth)
         }
-
         window.addEventListener('resize', handleResize);
-
         return _ => {
             window.removeEventListener('resize', handleResize);
         }
@@ -95,7 +93,7 @@ export default function RelatorioRead({ setAuthorized }) {
         <Container disableGutters maxWidth={windowWidth} sx={{ padding: 0 }}>
             <Box sx={{ minWidth: 600, minHeight: 300, height: windowHeight, padding: 0, mb: 0 }}>
                 <Grid container spacing={0}>
-                    <Grid xs sx={{ maxWidth: 240, minWidth: 240 }}>
+                    <Grid sx={{ maxWidth: 240, minWidth: 240 }}>
                         <Sidebar
                             setAuthorized={setAuthorized}>
                         </Sidebar>

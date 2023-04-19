@@ -12,12 +12,11 @@ export default function TeacherLogin({ isAuthorized, setAuthorized }) {
 
     const login = async () => {
         let teacher = await login_teacher(cpf, password);
-        console.log(teacher)
         if(teacher.data.data[0] !== undefined) {
             const returnPathname = sessionStorage.getItem('lastPage') ?? '/';
             sessionStorage.removeItem('lastPage');
-            localStorage.setItem('authorized', 'true')
-            localStorage.setItem('cpf', cpf)
+            sessionStorage.setItem('authorized', 'true')
+            sessionStorage.setItem('cpf', cpf)
             setAuthorized(true)
             return(
                 <Navigate to={returnPathname} replace></Navigate>
