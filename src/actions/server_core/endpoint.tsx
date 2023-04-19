@@ -51,7 +51,7 @@ export const endpoints = {
 };
 
 export const api_links = {
-BACKEND: 'http://ec2-52-201-162-139.compute-1.amazonaws.com:8000',
+BACKEND: 'http://ec2-3-142-212-243.us-east-2.compute.amazonaws.com:8000',
 FRONTEND: 'http://localhost:1234'
 };
 
