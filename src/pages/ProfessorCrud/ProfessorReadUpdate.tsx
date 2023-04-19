@@ -5,103 +5,99 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import logo from "../../data/logo.png";
+import logo from '../../data/logo.png';
 import { useNavigate } from 'react-router-dom';
-import InputMask from "react-input-mask";
+import InputMask from 'react-input-mask';
 import { useSearchParams, Route, Link } from 'react-router-dom'
 
 import { api_links } from '../../actions/server_core/endpoint';
-import { aluno_put } from '../../actions/Aluno';
-import { aluno_get_search } from '../../actions/Aluno';
-import { aluno_delete } from '../../actions/Aluno';
+import { aluno_put, teacher_get } from '../../actions/Professor';
+import { aluno_get_search } from '../../actions/Professor';
+import { aluno_delete } from '../../actions/Professor';
 
 import { Sidebar } from '../../components/sidebar/sidebar';
 
 export default function ProfessorReadUpdate({ setAuthorized }) {
-    const navigate = useNavigate()
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [email, Set_email] = useState([]);
-    const [name, Set_name] = useState([]);
-    const [cpf, Set_cpf] = useState(localStorage.getItem("cpf"));
-    const [college, Set_college] = useState([]);
-    const [school, Set_school] = useState([]);
-    const [university_id, Set_university_id] = useState([]);
+    const navigate = useNavigate()
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [cpf, setCpf] = useState(localStorage.getItem('cpf'));
+    const [department, setDepartment] = useState('')
+    const [school, setSchool] = useState('');
+    const [college, setCollege] = useState('');
+    const [university_id, setUniversity_id] = useState('');
+    const [info, setInfo] = useState([])
 
     useEffect(() => {
         function handleResize() {
             setWindowHeight(window.innerHeight)
             setWindowWidth(window.innerWidth)
-            console.log(window.location.href)
         }
-
         window.addEventListener('resize', handleResize);
-
         return _ => {
             window.removeEventListener('resize', handleResize);
         }
     })
 
-    const [info, setInfo] = useState([])
-
     useEffect(() => {
-
         (async () => {
-            var cpfString = String(cpf)
-            const cpfStringMod = (cpfString.replace(/\D/g, ""))
-            let info = await aluno_get_search(parseInt(cpfStringMod))
-            console.log(info)
-            if (info != null) {
+            let cpfString = String(cpf)
+            setCpf(cpfString)
+            const cpfStringMod = (cpfString.replace(/\D/g, ''))
+            let info = await teacher_get(cpfStringMod)
+            if (info.data !== undefined) {
                 if (info.data.data != null) {
-                    Set_email(info.data.data[0].email)
-                    Set_college(info.data.data[0].college)
-                    Set_name(info.data.data[0].name)
-                    Set_school(info.data.data[0].school)
-                    Set_university_id(info.data.data[0].university_id)
+                    setName(info.data.data[0].name)
+                    setEmail(info.data.data[0].email)
+                    setDepartment(info.data.data[0].department)
+                    setSchool(info.data.data[0].school)
+                    setCollege(info.data.data[0].college)
+                    setUniversity_id(info.data.data[0].university_id)
                 }
             }
-
         }
         )()
-
     }, []);
 
     return (
         <Container disableGutters maxWidth={windowWidth} sx={{ padding: 0 }}>
             <Box sx={{ minWidth: 600, minHeight: 300, height: windowHeight, padding: 0, mb: 0 }}>
                 <Grid container spacing={0}>
-                    <Grid xs sx={{ maxWidth: 240, minWidth: 240 }}>
+                    <Grid sx={{ maxWidth: 240, minWidth: 240 }}>
                         <Sidebar
                             setAuthorized={setAuthorized}>
                         </Sidebar>
                     </Grid>
                     <Grid xs sx={{
-                        display: "flex",
-                        flexDirection: "column",
+                        display: 'flex',
+                        flexDirection: 'column',
                         height: windowHeight,
                         minHeight: 400,
-                        overflow: "hidden",
-                        overflowY: "scroll",
+                        minWidth: 360,
+                        overflow: 'hidden',
+                        overflowY: 'scroll',
                     }}>
                         <Box sx={{
                             mx: 2
                         }}>
                             <Box sx={{ my: 2 }}>
-                                Informações do Aluno
+                                <h1>Suas Informações:</h1>
                             </Box>
                             <Box sx={{ my: 2 }}>
-                                <Grid container spacing={0} columns="16">
+                                <Grid container spacing={0} columns='16'>
                                     <Grid xs={7}>
                                         <Box sx={{ mr: 1 }}>
 
                                             <TextField
-                                                id="name"
+                                                id='name'
                                                 value={name}
                                                 fullWidth
-                                                label="Nome"
-                                                defaultValue=""
-                                                size="small"
-                                                onChange={(e) => Set_name(e.target.value)}
+                                                label='Nome'
+                                                defaultValue=''
+                                                size='small'
+                                                onChange={(e) => setName(e.target.value)}
                                                 inputProps={{ readOnly: true, disableUnderline: true }}
                                             />
                                         </Box>
@@ -109,37 +105,35 @@ export default function ProfessorReadUpdate({ setAuthorized }) {
                                     <Grid xs>
                                         <Box sx={{ ml: 1 }}>
                                             <InputMask
-                                                mask="999.999.999-99"
+                                                mask='999.999.999-99'
                                                 value={cpf}
                                                 disabled={false}
-                                                maskChar=" "
+                                                maskChar=' '
                                             >
                                                 {() => <TextField
-                                                    id="cpf"
+                                                    id='cpf'
                                                     fullWidth
-                                                    label="CPF"
-                                                    defaultValue=""
-                                                    size="small"
+                                                    label='CPF'
+                                                    defaultValue=''
+                                                    size='small'
                                                     inputProps={{ readOnly: true, disableUnderline: true }}
                                                 />}
                                             </InputMask>
                                         </Box>
                                     </Grid>
                                 </Grid>
-
                             </Box>
-
                             <Box sx={{ my: 2 }}>
-                                <Grid container spacing={0} columns="16">
+                                <Grid container spacing={0} columns='16'>
                                     <Grid xs={6}>
                                         <Box sx={{ mr: 1 }}>
                                             <TextField
-                                                id="college"
+                                                id='college'
                                                 value={college}
                                                 fullWidth
-                                                label="Universidade"
-                                                defaultValue=""
-                                                size="small"
+                                                label='Universidade'
+                                                defaultValue=''
+                                                size='small'
                                                 inputProps={{ readOnly: true, disableUnderline: true }}
                                             />
 
@@ -148,12 +142,12 @@ export default function ProfessorReadUpdate({ setAuthorized }) {
                                     <Grid xs>
                                         <Box sx={{ ml: 1 }}>
                                             <TextField
-                                                id="university_id"
+                                                id='university_id'
                                                 value={university_id}
                                                 fullWidth
-                                                label="ID da universidade"
-                                                defaultValue=""
-                                                size="small"
+                                                label='ID da universidade'
+                                                defaultValue=''
+                                                size='small'
                                                 inputProps={{ readOnly: true, disableUnderline: true }}
                                             />
                                         </Box>
@@ -161,38 +155,35 @@ export default function ProfessorReadUpdate({ setAuthorized }) {
                                 </Grid>
                             </Box>
                             <Box sx={{ my: 2 }}>
-                                <Grid container spacing={0} columns="16">
+                                <Grid container spacing={0} columns='16'>
                                     <Grid xs>
-                                        <Box sx={{ ml: 1 }}>
+                                        <Box sx={{ mr: 1 }}>
                                             <TextField
-                                                id="school"
+                                                id='school'
                                                 value={school}
-                                                label="Faculdade"
-                                                defaultValue=""
+                                                label='Faculdade'
+                                                defaultValue=''
                                                 fullWidth
-                                                size="small"
+                                                size='small'
                                                 inputProps={{ readOnly: true, disableUnderline: true }}
                                             />
                                         </Box>
-
                                     </Grid>
                                     <Grid xs>
                                         <Box sx={{ ml: 1 }}>
                                             <TextField
-                                                id="email"
+                                                id='email'
                                                 value={email}
-                                                label="Email"
-                                                defaultValue=""
+                                                label='Email'
+                                                defaultValue=''
                                                 fullWidth
-                                                size="small"
+                                                size='small'
                                                 inputProps={{ readOnly: true, disableUnderline: true }}
                                             />
                                         </Box>
-
                                     </Grid>
                                 </Grid>
                             </Box>
-
                         </Box>
                     </Grid>
                 </Grid>

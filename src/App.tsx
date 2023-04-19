@@ -26,7 +26,6 @@ import './App.css';
 
 const App = () => {
   const [authorized, setAuthorized] = useState(false);
-  const [cpf, setCpf] = useState('')
 
   useEffect(() => {
     function handleStorage() {
@@ -50,7 +49,7 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <TeacherLogin isAuthorized={authorized} setAuthorized={setAuthorized} passCpf={setCpf} />
+            <TeacherLogin isAuthorized={authorized} setAuthorized={setAuthorized} />
           }
         />
         <Route

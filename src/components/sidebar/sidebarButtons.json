@@ -1,7 +1,7 @@
 [
   {
     "imgSrc": "../../images/jobOffers.svg",
-    "imgAlt": "Vagas",
+    "imgAlt": "Veja as vagas",
     "service": "/vagas"
   },{
     "imgSrc": "../../images/handWithPencil.svg",
@@ -9,11 +9,11 @@
     "service": "/assinatura"
   },{
     "imgSrc": "../../images/reportEvaluation.svg",
-    "imgAlt": "Gere relatórios",
+    "imgAlt": "Aprove relatórios",
     "service": "/relatorio"
   },{
     "imgSrc": "../../images/dataManagement.svg",
-    "imgAlt": "Verifique seus dados",
+    "imgAlt": "Altere seus dados",
     "service": "/conta"
   }
 ]

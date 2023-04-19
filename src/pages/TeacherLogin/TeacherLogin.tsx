@@ -1,39 +1,23 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+
 import './login.css'
 import logo from '../../images/logo.svg'
-
 import { login_teacher } from '../../actions/Login';
 
-export default function TeacherLogin({ isAuthorized, setAuthorized, passCpf }) {
+export default function TeacherLogin({ isAuthorized, setAuthorized }) {
     const [cpf, setCpf] = useState('')
     const [password, setPassword] = useState('')
-    // const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-    // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    // const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     function handleResize() {
-    //         setWindowHeight(window.innerHeight)
-    //         setWindowWidth(window.innerWidth)
-    //         console.log(window.location.href)
-    //     }
-    //     window.addEventListener('resize', handleResize);
-    //     return _ => {
-    //         window.removeEventListener('resize', handleResize);
-    //     }
-    // })
 
     const login = async () => {
         let teacher = await login_teacher(cpf, password);
-        // console.log(teacher)
-        if(teacher.data !== undefined) {
-            passCpf(cpf)
+        console.log(teacher)
+        if(teacher.data.data[0] !== undefined) {
             const returnPathname = sessionStorage.getItem('lastPage') ?? '/';
             sessionStorage.removeItem('lastPage');
             localStorage.setItem('authorized', 'true')
+            localStorage.setItem('cpf', cpf)
             setAuthorized(true)
             return(
                 <Navigate to={returnPathname} replace></Navigate>
@@ -52,7 +36,6 @@ export default function TeacherLogin({ isAuthorized, setAuthorized, passCpf }) {
     if (isAuthorized == true) {
         const returnPathname = sessionStorage.getItem('lastPage') ?? '/vagas';
         sessionStorage.removeItem('lastPage');
-        // console.log(returnPathname);
         return(
             <Navigate to={returnPathname} replace></Navigate>
         );
@@ -85,5 +68,5 @@ export default function TeacherLogin({ isAuthorized, setAuthorized, passCpf }) {
                 </div>
             </div>
         </div>
-      )
+    )
 }
