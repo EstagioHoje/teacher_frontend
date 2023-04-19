@@ -1,18 +1,17 @@
-import { ApiGet } from "./server_core/api_get";
-import { ApiPut } from "./server_core/api_put";
-import { ApiPost } from "./server_core/api_post";
-import { ApiDelete } from "./server_core/api_delete";
-import { endpoints } from "./server_core/endpoint";
-import { ApiDelet } from "./server_core/api_delete";
-
-export const vaga_get_search = async (id) => {
-    const endp = endpoints.VAGA_GET + "/?id=" + id;
-    return await ApiGet(endp)
-}
+import { ApiGet } from './server_core/api_get';
+import { ApiPut } from './server_core/api_put';
+import { ApiPost } from './server_core/api_post';
+import { ApiDelete } from './server_core/api_delete';
+import { endpoints } from './server_core/endpoint';
 
 export const vaga_get_all = async () => {
     const endp = endpoints.VAGA_GET_ALL;
-    //const endp = endpoints.VAGA_GET_ALL;
+    return await ApiGet(endp)
+}
+
+// Get single vaga
+export const vaga_get_search = async (id) => {
+    const endp = endpoints.VAGA_GET + '/?id=' + id;
     return await ApiGet(endp)
 }
 
@@ -33,7 +32,7 @@ export const vaga_post = async (role, weekly_hours, physicality,
 }
 
 export const vaga_apply = async (cpf, id) => {
-    const endp = endpoints.VAGA_APPLY + "/?id_vacancy=" + id + "&cpf=" + cpf;
+    const endp = endpoints.VAGA_APPLY + '/?id_vacancy=' + id + '&cpf=' + cpf;
     return await ApiPut(endp)
 }
 
@@ -53,6 +52,6 @@ export const vaga_put = async (role, weekly_hours, physicality,
 }
 
 export const vaga_delete = async (id) => {
-    const endp = endpoints.VAGA_DELETE + "/?id=" + id;
+    const endp = endpoints.VAGA_DELETE + '/?id=' + id;
     return await ApiDelete(endp)
 }
