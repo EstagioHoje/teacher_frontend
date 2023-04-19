@@ -23,12 +23,11 @@ export default function ProfessorReadUpdate({ setAuthorized }) {
     const navigate = useNavigate()
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [cpf, setCpf] = useState(localStorage.getItem('cpf'));
+    const [cpf, setCpf] = useState(sessionStorage.getItem('cpf'));
     const [department, setDepartment] = useState('')
     const [school, setSchool] = useState('');
     const [college, setCollege] = useState('');
-    const [university_id, setUniversity_id] = useState('');
-    const [info, setInfo] = useState([])
+    const [university_id, setUniversity_id] = useState('')
 
     useEffect(() => {
         function handleResize() {
@@ -43,19 +42,14 @@ export default function ProfessorReadUpdate({ setAuthorized }) {
 
     useEffect(() => {
         (async () => {
-            let cpfString = String(cpf)
-            setCpf(cpfString)
-            const cpfStringMod = (cpfString.replace(/\D/g, ''))
-            let info = await teacher_get(cpfStringMod)
-            if (info.data !== undefined) {
-                if (info.data.data != null) {
-                    setName(info.data.data[0].name)
-                    setEmail(info.data.data[0].email)
-                    setDepartment(info.data.data[0].department)
-                    setSchool(info.data.data[0].school)
-                    setCollege(info.data.data[0].college)
-                    setUniversity_id(info.data.data[0].university_id)
-                }
+            let teacher = await teacher_get(String(cpf).replace(/\D/g, ''))
+            if (teacher.data.data !== undefined) {
+                setName(teacher.data.data[0].name)
+                setEmail(teacher.data.data[0].email)
+                setDepartment(teacher.data.data[0].department)
+                setSchool(teacher.data.data[0].school)
+                setCollege(teacher.data.data[0].college)
+                setUniversity_id(teacher.data.data[0].university_id)
             }
         }
         )()
